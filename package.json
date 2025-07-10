@@ -1,0 +1,27 @@
+{
+  "name": "proyecto-final-ecommerce-julio-adaro",
+  "version": "1.0.0",
+  "description": "Proyecto Final Talento Tech 2025 - API REST E-Commerce en NODE.js con Express.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "watch": "node --watch index.js"
+  },
+  "keywords": ["talentotech", "ecommerce", "nodejs", "express", "api", "rest", "firebase", "jsonwebtoken", "cors", "body-parser"],
+  "author": "Julio Oscar Adaro",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "firebase": "^11.10.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
