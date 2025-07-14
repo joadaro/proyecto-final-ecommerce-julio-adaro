@@ -1,8 +1,7 @@
-import Express from 'express';
-import cors from 'cors';
+import express from 'express';
 import { login } from '../controllers/auth.controller.js';
 
-const router = Express.Router();
+const router = express.Router();
 
 router.post('/login', login);
 

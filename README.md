@@ -136,3 +136,8 @@ Finalmente, la aplicación debe contemplar el manejo de errores de forma clara, 
 - Configura JWT en el proyecto.
 - Crea un middleware de autenticación y protege las rutas correspondientes.
 - Agrega la lógica necesaria en la en controlador de login para validar la identidad del usuario y devolver un Bearer Token.
+
+#### Requerimiento #8: Despliegue a producción
+- Configura tu archivo vercel.json
+- Crea un nuevo proyecto en vercel
+- Despliega tu proyecto a producción

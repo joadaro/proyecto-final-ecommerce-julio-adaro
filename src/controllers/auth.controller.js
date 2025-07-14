@@ -4,27 +4,32 @@ const default_user = {
     id: 1,
     email: 'user@email.com',
     password: 'password123',
-    role: 'user'
+    admin: false
 }
 
-const login = (req, res) => {
+const login = (req, res) => { // Asincrónico???
     const { email, password } = req.body;
     // Validar que se envíen las credenciales
     if (!email || !password) {
         return res.status(400).json({ error: 'Faltan credenciales' });
     }
-    // Simular un usuario por defecto
+    // Simular una base de datos de usuarios
+    // En un caso real, aquí se buscaría el usuario en la base de datos
+
+    // Ejemplo de usuario devuelto por la consulta a la base de datos
     const user = {
-        id: default_user.id,
-        email: default_user.email,
-        role: default_user.role
+        email: email,
+        password: password,
+        role: 'user' // Asignar un rol por defecto
     };
     // Validar credenciales
     if (email === default_user.email && password === default_user.password) {
         // Generar token
-        const token = generateToken(default_user);
-        return res.status(200).json({ message: 'Autenticación exitosa', token });
+        const token = generateToken(user);
+        return res.status(200).json({ token });
     } else {
         return res.status(401).json({ error: 'Credenciales inválidas' });
     }
 }
+
+export { login };

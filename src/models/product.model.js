@@ -1,16 +1,18 @@
 /* ESTRUCTURA DE DATOS DEL PRODUCTO
 El producto debe tener la siguiente estructura:
     {
-        "id": 1,                                // Autonumérico
-        "store": "Tienda 1",                    // String
-        "name": "Producto 1",                   // String
-        "color": "Rojo",                        // String
-        "size": "M",                            // String
-        "details": "Detalles del producto 1",   // String
-        "price": 100,                           // Número
-        "category": "Categoría 1",              // String
-        "status": "pendiente",                  // String
-        "createdAt": "2023-10-01T12:00:00Z"     // Fecha y hora
+        "id": "8GcQtrHKoCKb5UL45sni", // ID único del producto
+        "store": "pies a la moda", // Nombre de la tienda
+        "category": "calzado", // Categoría del producto
+        "commision": 5000, // Comisión por venta
+        "article": "campus importadas", // Nombre del artículo
+        "price": 30000, // Precio del producto
+        "idClient": "dory", // ID del cliente (4 letras)
+        "size": "36", // Talle del producto
+        "status": "pendiente", // Estado del producto (pendiente, reservado, cancelado, comprado, recibido)
+        "createdAt": "2025-04-08T15:07:14.976Z", // Fecha de creación del producto
+        "details": "", // Detalles adicionales del producto
+        "color": "negro/rosa" // Color del producto
     }
 */
 //--------------------Funciones para la base de datos ubicada en archivo JSON local--------------------
@@ -49,10 +51,10 @@ import {
 const productsCollection = collection(db, 'products');
 
 const getAllProducts = async () => {
-    console.log('Buscando todos los productos');
     try {
         const snapshot = await getDocs(productsCollection);
         const productsList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        console.log(`Se encontraron ${productsList.length} productos`);
         return productsList;
     } catch (error) {
         console.error('Error al obtener productos:', error);
@@ -60,8 +62,25 @@ const getAllProducts = async () => {
     }
 }
 
+const searchProducts = async (searchParams) => {
+    console.log('Buscando productos con parámetros:', searchParams);
+    try {
+        const snapshot = await getDocs(productsCollection);
+        const filteredProducts = snapshot.docs.filter(doc => {
+            const data = doc.data();
+            return Object.keys(searchParams).every(key => {
+                return data[key] && data[key].toString().toLowerCase().includes(searchParams[key].toLowerCase());
+            });
+        }).map(doc => ({ id: doc.id, ...doc.data() }));
+        console.log(`Se encontraron ${filteredProducts.length} productos que coinciden con los criterios de búsqueda`);
+        return filteredProducts;
+    } catch (error) {
+        console.error('Error al buscar productos:', error);
+        throw error;
+    }
+};
+
 const getProductById = async (id) => {
-    console.log(`Buscando producto con ID: ${id}`);
     try {
         const snapshot = await getDocs(productsCollection);
         const productDoc = snapshot.docs.find(doc => doc.id == id);
@@ -69,6 +88,7 @@ const getProductById = async (id) => {
             return null;
         }
         const product = { id: productDoc.id, ...productDoc.data() };
+        console.log(`Se encontró el producto con el ID especificado: ${id}`);
         return product;
     } catch (error) {
         console.error('Error al buscar producto por ID:', error);
@@ -77,10 +97,9 @@ const getProductById = async (id) => {
 };
 
 const createProduct = async (newProduct) => {
-    console.log('Nuevo producto recibido:', newProduct);
     try {
         const newDoc = await addDoc(productsCollection, newProduct);
-        console.log('Producto creado con ID:', newDoc.id);
+        console.log('Producto creado: ', { id: newDoc.id, ...newProduct });
         return { id: newDoc.id, ...newProduct };
     } catch (error) {
         console.error('Error al crear producto:', error);
@@ -88,8 +107,35 @@ const createProduct = async (newProduct) => {
     }
 }
 
+const replaceProduct = async (id, updatedProduct) => {
+    try {
+        const productRef = doc(db, 'products', id);
+        await updateDoc(productRef, updatedProduct);
+        console.log(`Producto con ID ${id} actualizado exitosamente`);
+        return { id, ...updatedProduct };
+    } catch (error) {
+        console.error(`Error al actualizar producto con ID ${id}:`, error);
+        throw error;
+    }
+};
+
+const deleteProduct = async (id) => {
+    try {
+        const productRef = doc(db, 'products', id);
+        await deleteDoc(productRef);
+        console.log(`Producto con ID ${id} eliminado exitosamente`);
+    } catch (error) {
+        console.error(`Error al eliminar producto con ID ${id}:`, error);
+        throw error;
+    }
+};
+
 export {
     getAllProducts,
+    searchProducts,
     getProductById,
-    createProduct
+    createProduct,
+    replaceProduct,
+    //updateProduct,
+    deleteProduct
 }
