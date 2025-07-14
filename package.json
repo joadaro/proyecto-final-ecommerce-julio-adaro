@@ -13,6 +13,10 @@
   "author": "Julio Oscar Adaro",
   "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joadaro/proyecto-final-ecommerce-julio-adaro"
+  },
   "dependencies": {
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
