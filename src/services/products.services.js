@@ -1,3 +1,5 @@
+// Módulo a revisar la posible utilidad del código
+
 import productModel from '../models/product.model.js';
 import userModel from '../models/user.model.js';
 

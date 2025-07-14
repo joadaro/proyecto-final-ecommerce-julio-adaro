@@ -1,6 +1,11 @@
+// Importar dependencias
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import authRouter from './src/routes/auth.routes.js';
+import bodyParser from 'body-parser';
+import productsRouter from './src/routes/products.router.js';
+//import usersRouter from './src/routes/users.router.js';
 
 // Cargar las variables de entorno desde el archivo .env
 dotenv.config();
@@ -10,9 +15,10 @@ const APP = express();
 // Configurar el puerto
 const PORT = process.env.PORT || 3001;
 
-// Importar las rutas de la API
-import productsRouter from './src/routes/products.router.js';
-//import usersRouter from './src/routes/users.router.js';
+// Configurar Middlewares
+APP.use(cors());
+APP.use(express.json());
+APP.use(bodyParser.json());
 
 // Métodos predeterminados
 APP.get('/favicon.ico', (req, res) => res.status(204).end());
@@ -23,7 +29,5 @@ APP.use('/api', productsRouter);
 //APP.use('/api', usersRouter);
 APP.use((req, res) => res.status(404).json({ 'ERROR 404': 'Recurso no encontrado' }));
 
-// Configuración del Servidor
-APP.use(cors());
-APP.use(express.json());
+// Ejecución del servidor
 APP.listen(PORT, () => { console.log(`Servidor ejecutándose en http://localhost:${PORT}`) });
