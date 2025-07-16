@@ -4,7 +4,9 @@ import {
     searchProduct,
     getProductById,
     createProduct,
-    replaceProduct
+    replaceProduct,
+    updateProduct,
+    deleteProduct
 } from '../controllers/products.controller.js';
 
 // Crear una instancia del enrutador
@@ -16,7 +18,7 @@ router.get('/products/search', searchProduct); // Buscar productos con parámetr
 router.get('/products/:id', getProductById); // Obtener producto por ID
 router.post('/products', createProduct); // Crear un nuevo producto
 router.put('/products/:id', replaceProduct); // Reemplazar producto
-// router.patch('/products/:id', updateProduct); // Actualizar producto
+router.patch('/products/:id', updateProduct); // Actualizar producto
 router.delete('/products/:id', deleteProduct); // Eliminar producto
 
 // Exportar el enrutador para su uso en otros módulos

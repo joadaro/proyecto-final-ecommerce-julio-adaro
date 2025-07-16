@@ -54,7 +54,6 @@ const getAllProducts = async () => {
     try {
         const snapshot = await getDocs(productsCollection);
         const productsList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        console.log(`Se encontraron ${productsList.length} productos`);
         return productsList;
     } catch (error) {
         console.error('Error al obtener productos:', error);
@@ -72,7 +71,6 @@ const searchProducts = async (searchParams) => {
                 return data[key] && data[key].toString().toLowerCase().includes(searchParams[key].toLowerCase());
             });
         }).map(doc => ({ id: doc.id, ...doc.data() }));
-        console.log(`Se encontraron ${filteredProducts.length} productos que coinciden con los criterios de búsqueda`);
         return filteredProducts;
     } catch (error) {
         console.error('Error al buscar productos:', error);
@@ -88,10 +86,9 @@ const getProductById = async (id) => {
             return null;
         }
         const product = { id: productDoc.id, ...productDoc.data() };
-        console.log(`Se encontró el producto con el ID especificado: ${id}`);
         return product;
     } catch (error) {
-        console.error('Error al buscar producto por ID:', error);
+        console.error(`Error al buscar producto con id "${id}:`, error);
         throw error;
     }
 };
@@ -99,7 +96,8 @@ const getProductById = async (id) => {
 const createProduct = async (newProduct) => {
     try {
         const newDoc = await addDoc(productsCollection, newProduct);
-        console.log('Producto creado: ', { id: newDoc.id, ...newProduct });
+        console.log({ id: newDoc.id, ...newProduct });
+        console.log('Mensaje: Producto creado exitosamente');
         return { id: newDoc.id, ...newProduct };
     } catch (error) {
         console.error('Error al crear producto:', error);
@@ -110,11 +108,29 @@ const createProduct = async (newProduct) => {
 const replaceProduct = async (id, updatedProduct) => {
     try {
         const productRef = doc(db, 'products', id);
-        await updateDoc(productRef, updatedProduct);
-        console.log(`Producto con ID ${id} actualizado exitosamente`);
+        const snapshot = await getDoc(productRef);
+        const actualStatus = snapshot.data().status;
+        if (actualStatus !== 'pendiente' && actualStatus !== 'cancelado') {
+            console.log('Mensaje: El estado actual del producto no permite el reemplazo del registro')
+            return 403;
+        }
+        await updateDoc(productRef, {...updatedProduct});
+        console.log(`Mensaje: Producto con id '${id}' actualizado exitosamente`);
         return { id, ...updatedProduct };
     } catch (error) {
-        console.error(`Error al actualizar producto con ID ${id}:`, error);
+        console.error(`Error al actualizar producto con id "${id}":`, error);
+        throw error;
+    }
+};
+
+const updateProduct = async (id, updatedFields) => {
+    try {
+        const productRef = doc(db, 'products', id);
+        await updateDoc(productRef, updatedFields);
+        console.log(`Mensaje: Producto con id "${id}" actualizado exitosamente`);
+        return { id, ...updatedFields };
+    } catch (error) {
+        console.error(`Mensaje: Error al actualizar producto con id "${id}":`, error);
         throw error;
     }
 };
@@ -123,9 +139,9 @@ const deleteProduct = async (id) => {
     try {
         const productRef = doc(db, 'products', id);
         await deleteDoc(productRef);
-        console.log(`Producto con ID ${id} eliminado exitosamente`);
+        console.log(`Mensaje: Producto con id '${id}' eliminado exitosamente`);
     } catch (error) {
-        console.error(`Error al eliminar producto con ID ${id}:`, error);
+        console.error(`Error al eliminar producto con id "${id}":`, error);
         throw error;
     }
 };
@@ -136,6 +152,6 @@ export {
     getProductById,
     createProduct,
     replaceProduct,
-    //updateProduct,
+    updateProduct,
     deleteProduct
 }

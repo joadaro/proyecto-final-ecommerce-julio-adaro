@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 // Importar las rutas
 import authRouter from './src/routes/auth.routes.js';
+// import commissionsRouter from './src/routes/commissions.router.js';
 import productsRouter from './src/routes/products.router.js';
 //import usersRouter from './src/routes/users.router.js';
 
@@ -26,6 +27,7 @@ APP.get('/favicon.ico', (req, res) => res.status(204).end());
 APP.get('/', (req, res) => res.send('Mensaje: Se ejecutó el método GET en la ruta raíz ("/")'));
 
 // Métodos de la API
+// APP.use('/api', commissionsRouter); // Rutas de comisiones
 APP.use('/api', productsRouter); // Rutas de productos
 //APP.use('/api', usersRouter); // Rutas de usuarios
 APP.use((req, res) => res.status(404).json({ 'ERROR 404': 'Recurso no encontrado' }));
