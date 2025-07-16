@@ -7,8 +7,9 @@
 <details>
 <summary><b>Descripción del Proyecto Final</b></summary><br>
 
+## Descripción ##
 El objetivo del proyecto es diseñar, desarrollar  desplegar una API RESTful funcional que permita gestionar los productos de una tienda en línea o E-Commerce. Este sistema debe permitir a los usuarios autorizados a realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre los productos de la tienda y tener la capacidad de almacenar los datos tanto de manera local (JSON) como en la nube (Firebase/Firestore). El desarrollo de este proyecto te permitirá implementar todos los conocimientos adquiridos a lo largo de la cursada y sin dudas plantará algunas semillas para que sigas investigando y aprendiendo sobre el mundo backend y su enorme cantidad de alternativas y aplicaciones en el mundo del desarrollo web.
-- - -
+
 **El proyecto consistirá en:**
 1. Construir un servidor web utilizando Node.js y Express.js.
 2. Implementar una estructura de proyecto modular y organizada basada en los principios de arquitectura RESTful.
@@ -16,8 +17,8 @@ El objetivo del proyecto es diseñar, desarrollar  desplegar una API RESTful fun
 4. Asegurar la correcta comunicación entre cliente y servidor mediante métodos y códigos HTTP.
 5. Crear y configurar capas lógicas de seguridad y autenticación.
 6. Desplegar el proyecto en un entorno de producción funcional, accesible mediante una URL pública.
-- - -
-**Requerimientos específicos:**
+
+### Requerimientos específicos: ###
 1. Estructura del proyecto
     - Crear una estructura clara con las siguientes carpetas principales:
         - /controllers: Contendrá la lógica del negocio.
@@ -40,21 +41,21 @@ El objetivo del proyecto es diseñar, desarrollar  desplegar una API RESTful fun
     - Migrar el manejo de datos a Firebase/Firestore, implementando un servicio para consumir esta base de datos.
 5. Despliegue
     - Subir la API a un servicio de producción como Vercel, Railway, entre otros.
-- - -
-**Funcionalidad Esperada:**
+
+### Funcionalidad Esperada: ###
 - La API debe responder correctamente a los métodos HTTP (GET, POST, PUT, PATCH, DELETE).
 - La API debe devolver los productos o el producto seleccionado.
 - Las rutas definidas deben ser claras y tener una responsabilidad única.
 - El sistema debe manejar errores comunes (404, 500) y debe devolver mensajes claros y escriptivos.
 - Los datos deben almacenarse y recuperarse correctamente desde la base de datos local (JSON) y la nube (Firestore).
 - La API debe permitir el uso de la herramienta solo a usuarios autorizados y autenticados.
-- - -
-**Entrega del Proyecto:**
+
+### Entrega del Proyecto: ###
 - Formato de Entrega: El proyecto debe ser subido a un repositorio de GitHub. Se deberá compartir el enlace del repositorio en el aula virtual antes de la fecha límite.
 - Nombre del Repositorio: proyecto-final-ecommerce-[nombre-apellido]
 - Documentación: El archivo README.md debe estar incluido en el repositorio, explicando claramente el objetivo del proyecto, las tecnologías utilizadas, cómo configurarlo y cualquier otro detalle relevante.
-- - -
-**Evaluación:**
+
+### Evaluación: ###
 1. Organización del Código:
     - Estructura modular y limpieza del código.
     - Uso adecuado de las capas de la aplicación: controladores, modelos, rutas y servicios.
@@ -68,7 +69,7 @@ El objetivo del proyecto es diseñar, desarrollar  desplegar una API RESTful fun
 5. Despliegue:
     - La API debe estar accesible mediante una URL pública.
 - - -
-**Notas Adicionales:**
+### Notas Adicionales: ###
 - ***Originalidad:*** Se espera que el proyecto final sea un trabajo original del estudiante. La copia o el uso de proyectos preexistentes será motivo de descalificación.
 - ***Presentación:*** Los estudiantes deben presentar su proyecto, explicando su arquitectura, decisiones técnicas y desafíos enfrentados.
 - ***Soporte:*** Durante el desarrollo del proyecto, los estudiantes podrán hacer preguntas durante las clases destinadas a la resolución de dudas, donde se les proporcionará asistencia técnica y orientación.
@@ -76,16 +77,18 @@ El objetivo del proyecto es diseñar, desarrollar  desplegar una API RESTful fun
 </details   >
 <details>
 <summary><b>Premisa del Proyecto</b></summary><br>
+
+## Premisa ##
 Actualmente nuestro cliente tiene diversos productos en catálogo y precisa disponer de una API Rest desde donde su tienda oficial pueda administrarlos, habilitando la posibilidad de Leer, Crear, Actualizar y Eliminar la información sobre los productos.
 La aplicación debe contar con una capa de autenticación para resguardad la seguridad de los datos que estarán alojados en una base de datos en la nube mediante el servicio Firestore de Firebase.
 
-- - -
+
 > *Es importante definir una arquitectura escalable, separando las distintas responsabilidades de la aplicación en capas que permitan establecer rutas, controladores, servicios y modelos de forma clara y prolija, además de las carpetas necesarias para guardar middlewares y configuración a servicios externos.*
-- - -
+
 Finalmente, la aplicación debe contemplar el manejo de errores de forma clara, teniendo en cuenta fallos del tipo 404 para rutas no definidas, los estados 401 y 403 ante errores de autenticación y códigos de estado 400 y 500 cuando las peticiones contienen errores o nuestros servicios externos de datos no responden.
-- - -
+
 ### Requerimientos del Proyecto: ###
-- - -
+
 #### Requerimiento #1: Configuración Inicial ####
 
 - Crea un directorio donde alojarás tu proyecto e incluye un archivo index.js como punto de entrada.
@@ -152,4 +155,3 @@ Los datos necesarios para su carga son:
 - TIENDA: El nombre de la tienda que vende el producto por mayor
 - ARTICULO: El nombre del producto indicando en el texto el tipo y modelo en caso de tratarse de indumentaria (ej.: 'remera capibara').
 - CATEGORIA: La categoría del producto a fin de que la API se encargue de la búsqueda de su comisión y se incluya al producto requerido. En caso de no encontrarse la comisión, la API fija la comisión en $ 0.
-
