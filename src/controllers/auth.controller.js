@@ -1,35 +1,38 @@
 import { generateToken} from '../utilities/token-generator.js';
+import { getUser } from '../models/user.model.js';
 
-const default_user = {
-    id: 1,
-    email: 'user@email.com',
-    password: 'password123',
-    admin: false
-}
-
-const login = (req, res) => { // Asincrónico???
+const login = async (req, res) => {
     const { email, password } = req.body;
-    // Validar que se envíen las credenciales
     if (!email || !password) {
         return res.status(400).json({ error: 'Faltan credenciales' });
     }
-    // Simular una base de datos de usuarios
-    // En un caso real, aquí se buscaría el usuario en la base de datos
-
-    // Ejemplo de usuario devuelto por la consulta a la base de datos
-    const user = {
-        email: email,
-        password: password,
-        role: 'user' // Asignar un rol por defecto
-    };
-    // Validar credenciales
-    if (email === default_user.email && password === default_user.password) {
-        // Generar token
-        const token = generateToken(user);
-        return res.status(200).json({ token });
-    } else {
+    const user = await getUser(email);
+    if (!user) {
+        console.log('Error: El email ingresado no se encuentra registrado');
         return res.status(401).json({ error: 'Credenciales inválidas' });
     }
+    if (password !== user.password) {
+        console.log('Error: La constraseña ingresada es incorrecta');
+        return res.status(401).json({ error: 'Credenciales inválidas' });
+    }
+    const token = generateToken(user); // Generar token
+    const msg = `¡${(user.gender == 'f') ? 'Benvenida' : 'Bienvenido'} ${user.name} ${user.surname}!`;
+    console.log(`Mensaje: ${msg}`);
+    return res.status(200).json({message:`${msg}`, token});
+
+    // Ejemplo de usuario devuelto por la consulta a la base de datos
+    // const user = {
+    //     email: email,
+    //     password: password,
+    //     admin: false
+    // };
+    // Validar credenciales
+    //if (email === user.email && password === default_user.password) {
+    //    const token = generateToken(user); // Generar token
+    //    return res.status(200).json({ token });
+    //} else {
+    //    return res.status(401).json({ error: 'Credenciales inválidas' });
+    //}
 }
 
 export { login };

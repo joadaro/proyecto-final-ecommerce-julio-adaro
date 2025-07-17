@@ -1,4 +1,4 @@
-# TALENTO TECH 2025 #
+# TALENTO TECH 2025
 - ***Curso:*** API REST en NODE.js con Express.js
 - ***Asunto:*** Proyecto Final Talento Tech 2025
 - ***Autor:*** Julio Oscar Adaro
@@ -7,7 +7,7 @@
 <details>
 <summary><b>Descripción del Proyecto Final</b></summary><br>
 
-## Descripción ##
+## Descripción
 El objetivo del proyecto es diseñar, desarrollar  desplegar una API RESTful funcional que permita gestionar los productos de una tienda en línea o E-Commerce. Este sistema debe permitir a los usuarios autorizados a realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre los productos de la tienda y tener la capacidad de almacenar los datos tanto de manera local (JSON) como en la nube (Firebase/Firestore). El desarrollo de este proyecto te permitirá implementar todos los conocimientos adquiridos a lo largo de la cursada y sin dudas plantará algunas semillas para que sigas investigando y aprendiendo sobre el mundo backend y su enorme cantidad de alternativas y aplicaciones en el mundo del desarrollo web.
 
 **El proyecto consistirá en:**
@@ -18,7 +18,7 @@ El objetivo del proyecto es diseñar, desarrollar  desplegar una API RESTful fun
 5. Crear y configurar capas lógicas de seguridad y autenticación.
 6. Desplegar el proyecto en un entorno de producción funcional, accesible mediante una URL pública.
 
-### Requerimientos específicos: ###
+### Requerimientos específicos:
 1. Estructura del proyecto
     - Crear una estructura clara con las siguientes carpetas principales:
         - /controllers: Contendrá la lógica del negocio.
@@ -42,7 +42,7 @@ El objetivo del proyecto es diseñar, desarrollar  desplegar una API RESTful fun
 5. Despliegue
     - Subir la API a un servicio de producción como Vercel, Railway, entre otros.
 
-### Funcionalidad Esperada: ###
+### Funcionalidad Esperada:
 - La API debe responder correctamente a los métodos HTTP (GET, POST, PUT, PATCH, DELETE).
 - La API debe devolver los productos o el producto seleccionado.
 - Las rutas definidas deben ser claras y tener una responsabilidad única.
@@ -50,12 +50,12 @@ El objetivo del proyecto es diseñar, desarrollar  desplegar una API RESTful fun
 - Los datos deben almacenarse y recuperarse correctamente desde la base de datos local (JSON) y la nube (Firestore).
 - La API debe permitir el uso de la herramienta solo a usuarios autorizados y autenticados.
 
-### Entrega del Proyecto: ###
+### Entrega del Proyecto:
 - Formato de Entrega: El proyecto debe ser subido a un repositorio de GitHub. Se deberá compartir el enlace del repositorio en el aula virtual antes de la fecha límite.
 - Nombre del Repositorio: proyecto-final-ecommerce-[nombre-apellido]
 - Documentación: El archivo README.md debe estar incluido en el repositorio, explicando claramente el objetivo del proyecto, las tecnologías utilizadas, cómo configurarlo y cualquier otro detalle relevante.
 
-### Evaluación: ###
+### Evaluación:
 1. Organización del Código:
     - Estructura modular y limpieza del código.
     - Uso adecuado de las capas de la aplicación: controladores, modelos, rutas y servicios.
@@ -69,7 +69,7 @@ El objetivo del proyecto es diseñar, desarrollar  desplegar una API RESTful fun
 5. Despliegue:
     - La API debe estar accesible mediante una URL pública.
 - - -
-### Notas Adicionales: ###
+### Notas Adicionales:
 - ***Originalidad:*** Se espera que el proyecto final sea un trabajo original del estudiante. La copia o el uso de proyectos preexistentes será motivo de descalificación.
 - ***Presentación:*** Los estudiantes deben presentar su proyecto, explicando su arquitectura, decisiones técnicas y desafíos enfrentados.
 - ***Soporte:*** Durante el desarrollo del proyecto, los estudiantes podrán hacer preguntas durante las clases destinadas a la resolución de dudas, donde se les proporcionará asistencia técnica y orientación.
@@ -78,7 +78,7 @@ El objetivo del proyecto es diseñar, desarrollar  desplegar una API RESTful fun
 <details>
 <summary><b>Premisa del Proyecto</b></summary><br>
 
-## Premisa ##
+## Premisa
 Actualmente nuestro cliente tiene diversos productos en catálogo y precisa disponer de una API Rest desde donde su tienda oficial pueda administrarlos, habilitando la posibilidad de Leer, Crear, Actualizar y Eliminar la información sobre los productos.
 La aplicación debe contar con una capa de autenticación para resguardad la seguridad de los datos que estarán alojados en una base de datos en la nube mediante el servicio Firestore de Firebase.
 
@@ -87,20 +87,20 @@ La aplicación debe contar con una capa de autenticación para resguardad la seg
 
 Finalmente, la aplicación debe contemplar el manejo de errores de forma clara, teniendo en cuenta fallos del tipo 404 para rutas no definidas, los estados 401 y 403 ante errores de autenticación y códigos de estado 400 y 500 cuando las peticiones contienen errores o nuestros servicios externos de datos no responden.
 
-### Requerimientos del Proyecto: ###
+### Requerimientos del Proyecto:
 
-#### Requerimiento #1: Configuración Inicial ####
+#### Requerimiento #1: Configuración Inicial
 
 - Crea un directorio donde alojarás tu proyecto e incluye un archivo index.js como punto de entrada.
 - Inicia Node.js y configura npm usando el comando npm init -y.
 - Agrega la propiedad "type": "module" en el archivo package.json para habilitar ESModules.
 - Configura un script llamado start para ejecutar el programa con el comando npm run start.
 
-#### Requerimiento #2: Instalación de dependencias ####
+#### Requerimiento #2: Instalación de dependencias
 
 - Instala express, cors, body-parser, dotenv, firebase y jsonwebtoken como dependencias del proyecto.
 
-#### Requerimiento #3: Configuración del servidor ####
+#### Requerimiento #3: Configuración del servidor
 
 - Crea un servidor web con express y realiza su configuración en el archivo index.js.
 - Configura CORS para habilitar las peticiones de origen cruzado, así las aplicaciones Frontend de la empresa pueden consultar al servicio sin problemas.
@@ -108,7 +108,7 @@ Finalmente, la aplicación debe contemplar el manejo de errores de forma clara, 
 - Establece un middleware que maneje las rutas desconocidas, devolviendo el estado 404 y un mensaje.
 - Crea un archivo .env donde se alojarán las variables de entorno del proyecto.
 
-#### Requerimiento #4: Rutas ####
+#### Requerimiento #4: Rutas
 
 - Crea la capa de rutas del proyecto.
 - Establece las rutas necesarias para atender las peticiones que interactúan con productos, así como también la ruta de login para autenticar usuarios:
@@ -120,12 +120,12 @@ Finalmente, la aplicación debe contemplar el manejo de errores de forma clara, 
     - auth.routes.js:
         - POST /auth/login recibe las credenciales de usuario en el cuerpo (body) de la petición y devuelve el Bearer token si son válidas o un error de autenticación en caso contrario.
 
-#### Requerimiento #5: Controladores y Servicios ####
+#### Requerimiento #5: Controladores y Servicios
 
 - Crea la capa de controladores para cada una de las rutas establecidas en el requerimiento anterior.
 - Crea la capa de servicios para atender a cada uno de los controladores.
 
-#### Requerimiento #6: Acceso a los datos ####
+#### Requerimiento #6: Acceso a los datos
 
 - Crea la capa de modelos de la aplicación.
 - Crea un nuevo proyecto de Firestore en Firebase, agrega una colección para registrar nuevos productos y crea el primer documento de producto para darle estructura y tipos de datos.
@@ -133,7 +133,7 @@ Finalmente, la aplicación debe contemplar el manejo de errores de forma clara, 
 - Utiliza la instancia de Firebase creada y crea los métodos necesarios para que el modelo pueda interactuar con la base de datos remota.
 - Conecta los servicios con los modelos.
 
-#### Requerimiento #7: Protege tus rutas ####
+#### Requerimiento #7: Protege tus rutas
 
 - Configura JWT en el proyecto.
 - Crea un middleware de autenticación y protege las rutas correspondientes.
@@ -147,11 +147,9 @@ Finalmente, la aplicación debe contemplar el manejo de errores de forma clara, 
 
 --------------------------------------------------
 
-## Documentación ##
-### Utilidad de la API ###
-La API está basada en el trabajo de comisionista en el rubro calzado e indumentaria y está orientado al manejo de datos de productos cuya compra es solicitada por revendedores. Los productos pueden ser cargados tanto por quien trabaja en comisión como por los revendedores que requieren su compra.
-Para ello se requiere que los clientes estén logueados a fin de cagar los productos con su id.
-Los datos necesarios para su carga son:
-- TIENDA: El nombre de la tienda que vende el producto por mayor
-- ARTICULO: El nombre del producto indicando en el texto el tipo y modelo en caso de tratarse de indumentaria (ej.: 'remera capibara').
-- CATEGORIA: La categoría del producto a fin de que la API se encargue de la búsqueda de su comisión y se incluya al producto requerido. En caso de no encontrarse la comisión, la API fija la comisión en $ 0.
+## Documentación
+### Acerca de esta API
+El desarrollo de la API está basado en el trabajo de comisionista en el rubro calzado e indumentaria. Su uso está pensado para el manejo de datos de productos cuya compra es solicitada por revendedores. Los productos pueden ser cargados tanto por quien trabaja en comisión como por los revendedores que encargan la tarea de comprar los productos a su comisionista bajo la comisión establecida por cada producto comprado de acuerdo a su categoría, tipo de producto y precio.
+A su vez se encuentra cargada una pequeña base de datos de las comisiones fijadas que será utilizada para incrustar por código las que correspondan al producto requerido sin necesidad de que éste sea ingresado por quien carga los datos.
+
+Instalación
