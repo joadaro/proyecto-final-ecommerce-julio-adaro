@@ -1,23 +1,29 @@
 import * as models from '../models/commission.model.js';
 
 const getAllCommissions = async (req, res) => {
-    const commissionsList = await models.getAllCommissions();
-    if (!commissionsList || commissionsList.length === 0) {
-        return res.status(200).json({'Error 404': 'No se encontraron comisiones o la base de datos se encuentra vacía'});
+    const commissions = await models.getAllCommissions();
+    if (!commissions || commissions.length === 0) {
+        const msg = `No se encontraron comisiones o la base de datos se encuentra vacía`;
+        console.log(`Error: ${msg}`);
+        return res.status(200).json({'Error 404': msg});
     }
-    console.log(`Mensaje: Se encontraron ${commissionsList.length} comisiones`);
-    res.status(200).json(commissionsList);
+    console.log(`Mensaje: Se encontraron ${commissions.length} comisiones`);
+    res.status(200).json(commissions);
 }
 
 const searchCommissions = async (req, res) => {
     const { category, name, type } = req.query;
+    let errormsg = 'error';
     if ( !category && !name && !type ) {
-        return res.status(400).json({'Error 400': 'Debe especificar al menos un parámetro de búsqueda'});
+        errormsg = `Debe especificar al menos un parámetro de búsqueda`;
+        console.log(`Error: ${errormsg}`);
+        return res.status(400).json({'Error 400': errormsg});
     }
     const filteredCommissions = await models.searchCommission(req.query);
     if (!filteredCommissions || filteredCommissions.length === 0) {
-        console.log('Error: No se encontraron comisiones que coincidan con los criterios de búsqueda');
-        return res.status(404).json({'Error 404': 'No se encontraron comisiones que coincidan con los criterios de búsqueda'});
+        errormsg = `No se encontraron comisiones que coincidan con los criterios de búsqueda`;
+        console.log(`Error: ${errormsg}`);
+        return res.status(404).json({'Error 404': errormsg});
     } else {
         console.log(`Mensaje: Se encontraron ${filteredCommissions.length} comisiones que coinciden con los criterios de búsqueda`);
         res.status(200).json(filteredCommissions);
@@ -25,10 +31,12 @@ const searchCommissions = async (req, res) => {
 }
 
 const createCommission = async (req, res) => {
+    // Aviso: Si se indicó el valor type='rango', el valor range es obligatorio de lo contrario es opcional
     const { category, name, range, type, value } = req.body;
     if  ( !category || !name || !type || !value || ( (type === 'rango') && !Array.isArray(range) ) ) {
-        console.log('Error: Faltan datos obligatorios para crear la comisión');
-        return res.status(400).json({ error: 'Faltan datos obligatorios para crear la comisión' });
+        const errormsg = `Faltan datos requeridos para crear la comisión`;
+        console.log(`Error: ${errormsg}`);
+        return res.status(400).json({'Error 400': errormsg});
     }
     if (Array.isArray(range) && (range.length == 2) && (range[0] > range[1])) {
         let aux = range[0];
@@ -44,17 +52,21 @@ const createCommission = async (req, res) => {
         value: value                            // Valor de la comisión o multiplicador para cálculo de porcentaje
     }
     const createdCommission = await models.createCommission(newCommission);
-    console.log('Mensaje: La nueva comisión se creó exitosamente');
-    res.status(200).json({'Mensaje': 'La nueva comisión se creó exitosamente', 'Comisión': createdCommission});
+    const msg = `Nueva comisión creada en éxito`;
+    console.log(createCommission);
+    console.log(`Mensaje: ${msg}`);
+    res.status(200).json({ 'Mensaje': msg, 'Comisión': createdCommission });
 }
 
 const updateCommission = async (req, res) => {
     const id = req.params.id;
     const updatedCom = req.body;
     const { range, type } = updatedCom;
+    let errormsg = `Error desconocido`;
     if  ( (type === 'rango') && !Array.isArray(range) ) {
-        console.log('Error: Faltan datos obligatorios para actualizar la comisión');
-        return res.status(400).json({ error: 'Faltan datos obligatorios para actualizar la comisión' });
+        errormsg = `Faltan datos requeridos para actualizar la comisión`;
+        console.log(`${errormsg}`);
+        return res.status(400).json({'Error 400': errormsg});
     }
     if ( Array.isArray(range) && (range.length == 2) && (range[0] > range[1]) ) {
         let aux = range[0];
@@ -63,26 +75,32 @@ const updateCommission = async (req, res) => {
     }
     const result = await models.updateCommission(id, updatedCom);
     if (result) {
-        console.log(`Mensaje: Comisión con id ${id} actualizada exitosamente`);
-        res.status(200).json({'Mensaje': 'Comisión actualizada exitosamente', 'Comisión': result});
+        console.log(`Mensaje: Comisión con id ${id} actualizada con éxtio`);
+        res.status(200).json({'Mensaje': `Comisión con id ${id} actualizada con éxtio`, 'Comisión': result});
     } else {
-        console.log(`Error: No se encontró la comisión con id ${id}`);
-        res.status(404).json({'Error 404': `No se encontró la comisión con el id especificado`});
+        errormsg = ` No se encontró la comisión con id ${id}`;
+        console.log(`Error: ${errormsg}`);
+        res.status(404).json({'Error 404': errormsg});
     }
 }
 
 const deleteCommission = async (req, res) => {
     const id = req.params.id;
+    let errormsg = `Error desconocido`;
     try {
         const comm = await models.getCommissionById(id);
         if (!comm) {
-            return res.status(404).json({'Error 404': `No se encontró comisión con id ${id}`});
+            errormsg = `No se encontró la comisión con id ${id}`;
+            console.log(`Error: ${errormsg}`);
+            return res.status(404).json({'Error 404': errormsg});
         }
         const result = await models.deleteCommission(id);
-        res.status(200).json({'Mensaje': 'Comisión eliminada exitosamente'});
+        console.log(`Mensaje: Se eliminó la comisión con id ${id}`)
+        res.status(200).json({'Mensaje': `Se eliminó la comisión con id ${id}`});
     } catch (error) {
-        console.error(`Error al eliminar comisión con id ${id}:`, error);
-        res.status(500).json({'Error 500': 'Error interno del servidor al eliminar la comisión'});    
+        errormsg = `Error interno del servidor al intentar eliminar la comisión con id ${id}`;
+        console.error(`${errormsg}:`, error);
+        res.status(500).json({'Error 500': errormsg});
     }
 }
 

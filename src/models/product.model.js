@@ -23,7 +23,6 @@ const getAllProducts = async () => {
 }
 
 const searchProducts = async (searchParams) => {
-    console.log('Buscando productos con parámetros:', searchParams);
     try {
         const snapshot = await getDocs(productsCollection);
         const filteredProducts = snapshot.docs.filter(doc => {

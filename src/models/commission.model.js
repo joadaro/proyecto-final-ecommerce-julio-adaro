@@ -23,8 +23,6 @@ const getAllCommissions = async () => {
 }
 
 const searchCommission = async (searchParams) => {
-    console.log('Buscando comisiones con parámetros:', searchParams);
-    const { article, category, price } = searchParams;
     try {
         const snapshot = await getDocs(commissionsCollection);
         const filteredCommissions = snapshot.docs.filter(doc => {

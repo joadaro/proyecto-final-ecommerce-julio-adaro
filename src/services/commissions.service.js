@@ -1,6 +1,6 @@
 import * as models from '../models/commission.model.js';
 
-const getCommission = async (params) => {
+export const getCommission = async (params) => {
     const { category, article, price } = params;
     if ( !category || !article || !price ) {
         return 0;
@@ -35,8 +35,4 @@ const getCommission = async (params) => {
         }
     }
     return matchedComm;
-}
-
-export {
-    getCommission
 }
