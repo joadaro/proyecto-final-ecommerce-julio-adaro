@@ -94,7 +94,7 @@ const createProduct = async (req, res) => {
 const replaceProduct = async (req, res) => {
     const id = req.params.id;
     const updatedProduct = {...req.body, status: 'pendiente', createdAt: new Date().toISOString()};
-    const { store, article, category, price, commission, client } = updatedProduct;
+    const { article, category, client, price, store } = updatedProduct;
     let errormsg = `Error desconocido`;
     if (!client || !isNaN(client) || client.length !== 4) {
         errormsg = `El id de cliente indicado como parámetro no es válido`;
@@ -141,7 +141,7 @@ const updateProduct = async (req, res) => {
     const result = await models.updateProduct(id, updatedProduct);
     if (result) {
         console.log(`Mensaje: Producto con id "${id}" actualizado con éxito`);
-        res.status(200).json({'Mensaje': `Producto con id "${id}" actualizado con éxito`, 'Producto': result});
+        res.status(200).json({'Mensaje': `Producto con id ${id} actualizado con éxito`, 'Producto': result});
     } else {
         errormsg = `No se encontró el producto con id ${id}`;
         console.log(`Error: ${errormsg}`);
@@ -174,6 +174,7 @@ const deleteProduct = async (req, res) => {
         res.status(500).json({'Error 500': errormsg});
     }
 };
+
 
 export {
     getAllProducts,

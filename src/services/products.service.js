@@ -1,8 +1,5 @@
-// Módulo a revisar la posible utilidad del código
-
 import productModel from '../models/product.model.js';
-import userModel from '../models/user.model.js';
-
+/*
 async function getAllProducts() {
   try {
     const products = await productModel.getAllProducts();
@@ -30,3 +27,4 @@ export {
   getAllProducts,
   getProductById
 };
+*/

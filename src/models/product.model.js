@@ -6,7 +6,7 @@ import {
     addDoc,
     updateDoc,
     deleteDoc,
-    doc
+    doc 
 } from 'firebase/firestore';
 
 const productsCollection = collection(db, 'products');
