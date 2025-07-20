@@ -1,5 +1,6 @@
-import productModel from '../models/product.model.js';
 /*
+import productModel from '../models/product.model.js';
+
 async function getAllProducts() {
   try {
     const products = await productModel.getAllProducts();

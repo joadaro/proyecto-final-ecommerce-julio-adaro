@@ -1,4 +1,4 @@
 jsondata
 node_modules
-./services/products.service.js
+services/products.service.js
 .env

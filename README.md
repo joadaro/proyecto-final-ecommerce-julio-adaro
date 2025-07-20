@@ -159,22 +159,25 @@ Para comenzar a utilizar esta API necesitas instalar en tu PC local el repositor
 3. gitBash : https://git-scm.com/downloads
 4. Postman : https://www.postman.com (Opcional)
 
-A continuación, desde la terminal (ctrl-ñ) de una ventana en Visual Studio Code ejecuta los siguientes pasos...
+A continuación, una vez abierto Visual Studio Code, utiliza la combinación de teclas <kbd>ctrl</kbd>+<kbd>ñ</kbd> para abrir la terminal y ejecuta los siguientes pasos...
 
 ### 📌 **Paso #1:** Clonar el repositorio en tu PC local:
 ```bash
 git clone https://github.com/joadaro/proyecto-final-ecommerce-julio-adaro.git
 ```
-### 📌 **Paso #2:** Ingresar al directorio creado e instalar dependencias
+### 📌 **Paso #2:** Ingresar al directorio creado
 ```bash
-cd proyecto-final-ecommerce-nodejs
+cd proyecto-final-ecommerce-julio-adaro
+```
+### 📌 **Paso #3:** Instalar dependencias
+```bash
 npm install
 ```
-### 📌 **Paso #3:** Ejecutar el servidor
+### 📌 **Paso #4:** Ejecutar el servidor
 ```bash
 npm start
 ```
-> ***Nota: En el caso de que realices modificaciones en el código y quieras ver reflejados los cambios en el servidor mientras éste se mantiene en ejecución se recomienda ejecutar el mismo con el siguiente comando...***
+> _Nota: En caso de que realices modificaciones en el código y quieras ver reflejados los cambios en el servidor mientras éste se mantiene en ejecución se recomienda ejecutar el mismo en modo desarrollador con el siguiente comando..._
 ```bash
 npm run dev
 ```
@@ -201,6 +204,7 @@ POST /api/auth/login
 ```
 
 ## 📦 Funcionalidades
+
 ### 📥 Obtener Productos
 #### 📍 Método y ruta
 ```
@@ -234,7 +238,6 @@ GET /products
 ```
 GET /products/search?{key=value}&{key=value}...
 ```
->**Información:** Para la búsqueda de productos se pueden utilizar indistintamente las "key" (campos) y valores como parámetros según corresponda... ***article={valor}*** para búscar productos por nombre; ***category={valor}*** para buscar productos por categoría; ***client={valor}*** para buscar productos por cliente (obligatorio de 4 letras); ***color={valor}*** para buscar productos por color; ***priority={valor}*** para buscar productor por prioridad; ***size={valor}*** para buscar productos por talle; ***status={valor}*** para buscar productos por estado (opciones: pendiente, cancelado, reservado, comprado, recibido); ***store={valor}*** para buscar productos por nombre de tienda. Para el caso de que se desee realizar una búsqueda con más de un parámetros se pueden incluir los que se requieran agregando el caractér & (ampersand) entre parámetros sin dejar espacios. Además, vale señalar que la búsqueda devuelve todos aquellos productos que tenga incluido el valor que se indique por lo que no es necesario indicar una palabra completa.
 #### 👁️‍🗨️ Respuesta esperada
 ```json
     {
@@ -257,14 +260,13 @@ GET /products/search?{key=value}&{key=value}...
     }
     ...
 ```
+>_Para la búsqueda de productos se pueden utilizar indistintamente las "key" (campos) y valores como parámetros según corresponda... ***article={valor}*** para búscar productos por nombre; ***category={valor}*** para buscar productos por categoría; ***client={valor}*** para buscar productos por cliente (obligatorio de 4 letras); ***color={valor}*** para buscar productos por color; ***priority={valor}*** para buscar productor por prioridad; ***size={valor}*** para buscar productos por talle; ***status={valor}*** para buscar productos por estado (opciones: pendiente, cancelado, reservado, comprado, recibido); ***store={valor}*** para buscar productos por nombre de tienda. Para el caso de que se desee realizar una búsqueda con más de un parámetros se pueden incluir los que se requieran agregando el caractér & (ampersand) entre parámetros sin dejar espacios. Además, vale señalar que la búsqueda devuelve todos aquellos productos que tenga incluido el valor que se indique por lo que no es necesario indicar una palabra completa._
 ---
 ### 🔎 Buscar Productos por ID
 #### 📍 Método y ruta
 ```
 GET /products/{id}
 ```
->**Información:** Para la búsqueda de productos por id se debe conocer primero el identificador único del producto que se desea buscar. Para ello, de no conocerlo se recomienda primera buscar todos los productos y hallar en la lista obtenida el id del que producto se quiere individualizar con esta búsqueda.
-
 #### 👁️‍🗨️ Respuesta esperada
 ```json
     {
@@ -283,13 +285,15 @@ GET /products/{id}
         "article": "String"
     }
 ```
+>_Para la búsqueda de productos por id se debe conocer primero el identificador único del producto que se desea buscar. Para ello, de no conocerlo se recomienda primero buscar todos los productos y hallar en la lista obtenida el id del que producto se quiere individualizar con la búsqueda._
+
 ---
 ### 🏷️ Crear un nuevo Producto
 #### 📍 Método y ruta
 ```
 POST /products
 ```
->**Información:** Para crear un producto como primer paso se debe estar autenticado en la API. Lea el apartado Login para ver como realizar la autenticación.
+>_Para crear un producto como primer paso se debe estar autenticado en la API. Lea el apartado Login para ver como realizar la autenticación._
 #### 💻 Body raw { } JSON
 ```json
     {
@@ -303,7 +307,6 @@ POST /products
         "store": "String",      // Nombre de la tienda que vende el producto
     }
 ```
->**Información:** Todos los campos son obligatorios con excepción de aquellos indicados como opcionales. En el caso del campo ***'article'***, es opcional incluir en el nombre el tipo de producto (ej.: camisa, pantalón, etc.) pero obligatorio ingresar el dato. La API inserta automáticamente los demás campos que completan la información del producto, como ser la fecha de ingreso (timeStamp), la prioridad (normal), etc.
 #### 👁️‍🗨️ Respuesta esperada
 ```json
     {
@@ -325,13 +328,14 @@ POST /products
         }
     }
 ```
+>_Todos los campos son obligatorios con excepción de aquellos indicados como opcionales. En el caso del campo ***'article'***, es opcional incluir en el nombre el tipo de producto (ej.: camisa, pantalón, etc.) pero obligatorio ingresar el dato. La API inserta automáticamente los demás campos que completan la información del producto, como ser la fecha de ingreso (timeStamp), la prioridad (normal), etc._
 ---
 ### 🔁 Reemplazar un Producto
 #### 📍 Método y ruta
 ```
 PUT /products/{id}
 ```
->**Información:** Para reemplazar un producto como primer paso se debe conocer el identificador único del producto a reemplazar y estar autenticado en la API. Lea el apartado Login para ver como realizar la autenticación.
+>_Para reemplazar un producto como primer paso se debe conocer el identificador único del producto a reemplazar y estar autenticado en la API. Lea el apartado Login para ver como realizar la autenticación._
 #### 💻 Body raw { } JSON
 ```json
     {
@@ -345,10 +349,7 @@ PUT /products/{id}
         "store": "String",      // Nombre de la tienda que vende el producto
     }
 ```
->**Información:** Todos los campos son obligatorios con excepción de aquellos indicados como opcionales. En el caso del campo ***'article'***, es opcional incluir en el nombre el tipo de producto (ej.: camisa, pantalón, etc.) pero obligatorio ingresar el dato. La API inserta automáticamente los demás campos que completan la información del producto, como ser la fecha de reemplazo (timeStamp), la prioridad (normal), etc.
-
->>***IMPORTANTE***: No se puede reemplazar los datos de un producto que contenga en el campo ***status*** el valor "comprado" o "recibido".
-
+>_Todos los campos son obligatorios con excepción de aquellos indicados como opcionales. En el caso del campo ***'article'***, es opcional incluir en el nombre el tipo de producto (ej.: camisa, pantalón, etc.) pero obligatorio ingresar el dato. La API inserta automáticamente los demás campos que completan la información del producto, como ser la fecha de reemplazo (timeStamp), la prioridad (normal), etc._
 #### 👁️‍🗨️ Respuesta esperada
 ```json
     {
@@ -370,6 +371,7 @@ PUT /products/{id}
         }
     }
 ```
+>***IMPORTANTE***: No se puede reemplazar los datos de un producto que contenga en el campo ***status*** el valor "comprado" o "recibido".
 ---
 ### 🔄 Actualizar los datos de un Producto
 #### 📍 Método y ruta
@@ -422,6 +424,7 @@ DELETE /products/{id}
 ```
 >***¡IMPORTANTE! :*** No se puede eliminar un producto que contenga en el campo ***status*** el valor "comprado" o "recibido".
 ---
+
 ## 📁 Estructura del proyecto
 ```
 📁 src/
